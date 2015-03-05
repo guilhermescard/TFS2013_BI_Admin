@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Team Foundation Warehouse Control web service</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="TakeWarehouseProcessingOffline">
+        <s:complexType />
+      </s:element>
+      <s:element name="TakeWarehouseProcessingOfflineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TakeWarehouseProcessingOfflineResult" type="tns:OnlineStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="OnlineStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Started" />
+          <s:enumeration value="Stopping" />
+          <s:enumeration value="Stopped" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="BringWarehouseProcessingOnline">
+        <s:complexType />
+      </s:element>
+      <s:element name="BringWarehouseProcessingOnlineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BringWarehouseProcessingOnlineResult" type="tns:OnlineStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TakeAnalysisProcessingOffline">
+        <s:complexType />
+      </s:element>
+      <s:element name="TakeAnalysisProcessingOfflineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TakeAnalysisProcessingOfflineResult" type="tns:OnlineStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BringAnalysisProcessingOnline">
+        <s:complexType />
+      </s:element>
+      <s:element name="BringAnalysisProcessingOnlineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BringAnalysisProcessingOnlineResult" type="tns:OnlineStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeSetting">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="settingId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newValue" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeSettingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ChangeSettingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSettings">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSettingsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSettingsResult" type="tns:WarehouseSettings" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WarehouseSettings">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RunIntervalSeconds" type="tns:WarehouseSetting" />
+          <s:element minOccurs="0" maxOccurs="1" name="IncrementalProcessIntervalSeconds" type="tns:WarehouseSetting" />
+          <s:element minOccurs="0" maxOccurs="1" name="FullProcessIntervalSeconds" type="tns:WarehouseSetting" />
+          <s:element minOccurs="0" maxOccurs="1" name="DailyFullProcessingTime" type="tns:WarehouseSetting" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaxParallelASProcessingCommands" type="tns:WarehouseSetting" />
+          <s:element minOccurs="0" maxOccurs="1" name="AnalysisSchemaUpdateWaitSeconds" type="tns:WarehouseSetting" />
+          <s:element minOccurs="0" maxOccurs="1" name="SchemaUpdateWaitSeconds" type="tns:WarehouseSetting" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataUpdateWaitSeconds" type="tns:WarehouseSetting" />
+          <s:element minOccurs="0" maxOccurs="1" name="WarehouseCommandSqlTimeout" type="tns:WarehouseSetting" />
+          <s:element minOccurs="0" maxOccurs="1" name="AnalysisServicesProcessingTimeout" type="tns:WarehouseSetting" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WarehouseSetting">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+        <s:attribute name="Description" type="s:string" />
+        <s:attribute name="DefaultValue" type="s:string" />
+      </s:complexType>
+      <s:element name="ProcessWarehouse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="collectionName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcessWarehouseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ProcessWarehouseResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcessAnalysisDatabase">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="processingType" type="tns:AnalysisDatabaseProcessingType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="AnalysisDatabaseProcessingType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Incremental" />
+          <s:enumeration value="Full" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ProcessAnalysisDatabaseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ProcessAnalysisDatabaseResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProcessingStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceHostName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeOnlineHostsOnly" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProcessingStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="WarehouseProcessingStatus" nillable="true" type="tns:WarehouseProcessingStatusDetails" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WarehouseProcessingStatusDetails">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequestTimeUtc" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="WarehouseProcessingOnlineStatus" type="tns:OnlineStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="AnalysisProcessingOnlineStatus" type="tns:OnlineStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="JobProcessingStatus" type="tns:ProcessingStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="JobsRunning" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="JobsQueued" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Instance" type="tns:HostedWarehouseJobGroupStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="Collections" type="tns:ArrayOfHostedWarehouseJobGroupStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ProcessingStatus">
+        <s:list>
+          <s:simpleType>
+            <s:restriction base="s:string">
+              <s:enumeration value="Idle" />
+              <s:enumeration value="SchemaChange" />
+              <s:enumeration value="DataChange" />
+              <s:enumeration value="IncrementalAnalysisProcessing" />
+              <s:enumeration value="FullAnalysisProcessing" />
+              <s:enumeration value="WaitingForSchemaChange" />
+            </s:restriction>
+          </s:simpleType>
+        </s:list>
+      </s:simpleType>
+      <s:complexType name="HostedWarehouseJobGroupStatus">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:HostedWarehouseJobGroupOfWarehouseJobExecutionDetails">
+            <s:attribute name="JobProcessingStatus" type="tns:ProcessingStatus" use="required" />
+            <s:attribute name="JobsRunning" type="s:int" use="required" />
+            <s:attribute name="JobsQueued" type="s:int" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="HostedWarehouseJobGroupOfWarehouseJobExecutionDetails">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Jobs" type="tns:ArrayOfWarehouseJobExecutionDetails" />
+        </s:sequence>
+        <s:attribute name="Name" type="s:string" />
+        <s:attribute name="Id" type="s1:guid" />
+        <s:attribute default="Started" name="Status" type="tns:TeamFoundationServiceHostStatus" />
+        <s:attribute name="StatusReason" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfWarehouseJobExecutionDetails">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Job" nillable="true" type="tns:WarehouseJobExecutionDetails" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WarehouseJobExecutionDetails">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WarehouseJobBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="LastRun" type="tns:WarehouseJobRunInfo" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrentRun" type="tns:WarehouseJobRunInfo" />
+              <s:element minOccurs="0" maxOccurs="1" name="NextRun" type="tns:WarehouseJobRunInfo" />
+            </s:sequence>
+            <s:attribute name="JobProcessingStatus" type="tns:ProcessingStatus" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="WarehouseJobBase" abstract="true">
+        <s:attribute name="Name" type="s:string" />
+        <s:attribute name="JobId" type="s1:guid" />
+        <s:attribute name="ExtensionName" type="s:string" />
+      </s:complexType>
+      <s:complexType name="WarehouseJobRunInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ResultMessage" type="s:string" />
+        </s:sequence>
+        <s:attribute default="0001-01-01T00:00:00" name="QueueTimeUtc" type="s:dateTime" />
+        <s:attribute default="0001-01-01T00:00:00" name="ExecutionStartTimeUtc" type="s:dateTime" />
+        <s:attribute default="0001-01-01T00:00:00" name="EndTimeUtc" type="s:dateTime" />
+        <s:attribute name="Result" type="tns:TeamFoundationJobResult" />
+        <s:attribute name="JobState" type="tns:TeamFoundationJobState" />
+      </s:complexType>
+      <s:simpleType name="TeamFoundationJobResult">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="Succeeded" />
+          <s:enumeration value="PartiallySucceeded" />
+          <s:enumeration value="Failed" />
+          <s:enumeration value="Stopped" />
+          <s:enumeration value="Killed" />
+          <s:enumeration value="Blocked" />
+          <s:enumeration value="ExtensionNotFound" />
+          <s:enumeration value="Inactive" />
+          <s:enumeration value="Disabled" />
+          <s:enumeration value="JobInitializationError" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="TeamFoundationJobState">
+        <s:restriction base="s:string">
+          <s:enumeration value="Dormant" />
+          <s:enumeration value="QueuedScheduled" />
+          <s:enumeration value="Running" />
+          <s:enumeration value="Paused" />
+          <s:enumeration value="Pausing" />
+          <s:enumeration value="Resuming" />
+          <s:enumeration value="Stopping" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="TeamFoundationServiceHostStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Starting" />
+          <s:enumeration value="Started" />
+          <s:enumeration value="Stopping" />
+          <s:enumeration value="Stopped" />
+          <s:enumeration value="Pausing" />
+          <s:enumeration value="Paused" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfHostedWarehouseJobGroupStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Collection" nillable="true" type="tns:HostedWarehouseJobGroupStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="WarehouseControlRequestHeader" type="tns:WarehouseControlRequestHeader" />
+      <s:complexType name="WarehouseControlRequestHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" default="true" name="IsVerboseOutput" type="s:boolean" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="SetWarehouseJobEnabledState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="collectionName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="state" type="tns:TeamFoundationJobEnabledState" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="TeamFoundationJobEnabledState">
+        <s:restriction base="s:string">
+          <s:enumeration value="Enabled" />
+          <s:enumeration value="SchedulesDisabled" />
+          <s:enumeration value="FullyDisabled" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SetWarehouseJobEnabledStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetWarehouseJobEnabledStateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetAnalysisJobEnabledState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="state" type="tns:TeamFoundationJobEnabledState" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetAnalysisJobEnabledStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetAnalysisJobEnabledStateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetJobProperties">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceHostName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jobName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetJobPropertiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetJobPropertiesResult" type="tns:WarehouseProcessingJobProperties" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WarehouseProcessingJobProperties">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Instance" type="tns:HostedWarehouseJobGroupOfWarehouseJobProperties" />
+          <s:element minOccurs="0" maxOccurs="1" name="Collections" type="tns:ArrayOfHostedWarehouseJobGroupOfWarehouseJobProperties" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HostedWarehouseJobGroupOfWarehouseJobProperties">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Jobs" type="tns:ArrayOfWarehouseJobProperties" />
+        </s:sequence>
+        <s:attribute name="Name" type="s:string" />
+        <s:attribute name="Id" type="s1:guid" />
+        <s:attribute default="Started" name="Status" type="tns:TeamFoundationServiceHostStatus" />
+        <s:attribute name="StatusReason" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfWarehouseJobProperties">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Job" nillable="true" type="tns:WarehouseJobProperties" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WarehouseJobProperties">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WarehouseJobBase">
+            <s:attribute name="RunInterval" type="s:int" use="required" />
+            <s:attribute name="EnabledState" type="tns:TeamFoundationJobEnabledState" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfHostedWarehouseJobGroupOfWarehouseJobProperties">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Collection" nillable="true" type="tns:HostedWarehouseJobGroupOfWarehouseJobProperties" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ProcessDefaultDimensionsForExpandedCapacity">
+        <s:complexType />
+      </s:element>
+      <s:element name="ProcessDefaultDimensionsForExpandedCapacityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ProcessDefaultDimensionsForExpandedCapacityResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TakeWarehouseProcessingOfflineSoapIn">
+    <wsdl:part name="parameters" element="tns:TakeWarehouseProcessingOffline" />
+  </wsdl:message>
+  <wsdl:message name="TakeWarehouseProcessingOfflineSoapOut">
+    <wsdl:part name="parameters" element="tns:TakeWarehouseProcessingOfflineResponse" />
+  </wsdl:message>
+  <wsdl:message name="BringWarehouseProcessingOnlineSoapIn">
+    <wsdl:part name="parameters" element="tns:BringWarehouseProcessingOnline" />
+  </wsdl:message>
+  <wsdl:message name="BringWarehouseProcessingOnlineSoapOut">
+    <wsdl:part name="parameters" element="tns:BringWarehouseProcessingOnlineResponse" />
+  </wsdl:message>
+  <wsdl:message name="TakeAnalysisProcessingOfflineSoapIn">
+    <wsdl:part name="parameters" element="tns:TakeAnalysisProcessingOffline" />
+  </wsdl:message>
+  <wsdl:message name="TakeAnalysisProcessingOfflineSoapOut">
+    <wsdl:part name="parameters" element="tns:TakeAnalysisProcessingOfflineResponse" />
+  </wsdl:message>
+  <wsdl:message name="BringAnalysisProcessingOnlineSoapIn">
+    <wsdl:part name="parameters" element="tns:BringAnalysisProcessingOnline" />
+  </wsdl:message>
+  <wsdl:message name="BringAnalysisProcessingOnlineSoapOut">
+    <wsdl:part name="parameters" element="tns:BringAnalysisProcessingOnlineResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeSettingSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeSetting" />
+  </wsdl:message>
+  <wsdl:message name="ChangeSettingSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeSettingResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSettingsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSettings" />
+  </wsdl:message>
+  <wsdl:message name="GetSettingsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSettingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcessWarehouseSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcessWarehouse" />
+  </wsdl:message>
+  <wsdl:message name="ProcessWarehouseSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcessWarehouseResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcessAnalysisDatabaseSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcessAnalysisDatabase" />
+  </wsdl:message>
+  <wsdl:message name="ProcessAnalysisDatabaseSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcessAnalysisDatabaseResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProcessingStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProcessingStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetProcessingStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProcessingStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProcessingStatusWarehouseControlRequestHeader">
+    <wsdl:part name="WarehouseControlRequestHeader" element="tns:WarehouseControlRequestHeader" />
+  </wsdl:message>
+  <wsdl:message name="SetWarehouseJobEnabledStateSoapIn">
+    <wsdl:part name="parameters" element="tns:SetWarehouseJobEnabledState" />
+  </wsdl:message>
+  <wsdl:message name="SetWarehouseJobEnabledStateSoapOut">
+    <wsdl:part name="parameters" element="tns:SetWarehouseJobEnabledStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetAnalysisJobEnabledStateSoapIn">
+    <wsdl:part name="parameters" element="tns:SetAnalysisJobEnabledState" />
+  </wsdl:message>
+  <wsdl:message name="SetAnalysisJobEnabledStateSoapOut">
+    <wsdl:part name="parameters" element="tns:SetAnalysisJobEnabledStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetJobPropertiesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetJobProperties" />
+  </wsdl:message>
+  <wsdl:message name="GetJobPropertiesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetJobPropertiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetJobPropertiesWarehouseControlRequestHeader">
+    <wsdl:part name="WarehouseControlRequestHeader" element="tns:WarehouseControlRequestHeader" />
+  </wsdl:message>
+  <wsdl:message name="ProcessDefaultDimensionsForExpandedCapacitySoapIn">
+    <wsdl:part name="parameters" element="tns:ProcessDefaultDimensionsForExpandedCapacity" />
+  </wsdl:message>
+  <wsdl:message name="ProcessDefaultDimensionsForExpandedCapacitySoapOut">
+    <wsdl:part name="parameters" element="tns:ProcessDefaultDimensionsForExpandedCapacityResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WarehouseControlWebServiceSoap">
+    <wsdl:operation name="TakeWarehouseProcessingOffline">
+      <wsdl:input message="tns:TakeWarehouseProcessingOfflineSoapIn" />
+      <wsdl:output message="tns:TakeWarehouseProcessingOfflineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BringWarehouseProcessingOnline">
+      <wsdl:input message="tns:BringWarehouseProcessingOnlineSoapIn" />
+      <wsdl:output message="tns:BringWarehouseProcessingOnlineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TakeAnalysisProcessingOffline">
+      <wsdl:input message="tns:TakeAnalysisProcessingOfflineSoapIn" />
+      <wsdl:output message="tns:TakeAnalysisProcessingOfflineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BringAnalysisProcessingOnline">
+      <wsdl:input message="tns:BringAnalysisProcessingOnlineSoapIn" />
+      <wsdl:output message="tns:BringAnalysisProcessingOnlineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeSetting">
+      <wsdl:input message="tns:ChangeSettingSoapIn" />
+      <wsdl:output message="tns:ChangeSettingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSettings">
+      <wsdl:input message="tns:GetSettingsSoapIn" />
+      <wsdl:output message="tns:GetSettingsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessWarehouse">
+      <wsdl:input message="tns:ProcessWarehouseSoapIn" />
+      <wsdl:output message="tns:ProcessWarehouseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessAnalysisDatabase">
+      <wsdl:input message="tns:ProcessAnalysisDatabaseSoapIn" />
+      <wsdl:output message="tns:ProcessAnalysisDatabaseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProcessingStatus">
+      <wsdl:input message="tns:GetProcessingStatusSoapIn" />
+      <wsdl:output message="tns:GetProcessingStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetWarehouseJobEnabledState">
+      <wsdl:input message="tns:SetWarehouseJobEnabledStateSoapIn" />
+      <wsdl:output message="tns:SetWarehouseJobEnabledStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAnalysisJobEnabledState">
+      <wsdl:input message="tns:SetAnalysisJobEnabledStateSoapIn" />
+      <wsdl:output message="tns:SetAnalysisJobEnabledStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJobProperties">
+      <wsdl:input message="tns:GetJobPropertiesSoapIn" />
+      <wsdl:output message="tns:GetJobPropertiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessDefaultDimensionsForExpandedCapacity">
+      <wsdl:input message="tns:ProcessDefaultDimensionsForExpandedCapacitySoapIn" />
+      <wsdl:output message="tns:ProcessDefaultDimensionsForExpandedCapacitySoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WarehouseControlWebServiceSoap" type="tns:WarehouseControlWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TakeWarehouseProcessingOffline">
+      <soap:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/TakeWarehouseProcessingOffline" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BringWarehouseProcessingOnline">
+      <soap:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/BringWarehouseProcessingOnline" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TakeAnalysisProcessingOffline">
+      <soap:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/TakeAnalysisProcessingOffline" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BringAnalysisProcessingOnline">
+      <soap:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/BringAnalysisProcessingOnline" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeSetting">
+      <soap:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/ChangeSetting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSettings">
+      <soap:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/GetSettings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessWarehouse">
+      <soap:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/ProcessWarehouse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessAnalysisDatabase">
+      <soap:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/ProcessAnalysisDatabase" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProcessingStatus">
+      <soap:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/GetProcessingStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetProcessingStatusWarehouseControlRequestHeader" part="WarehouseControlRequestHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetWarehouseJobEnabledState">
+      <soap:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/SetWarehouseJobEnabledState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAnalysisJobEnabledState">
+      <soap:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/SetAnalysisJobEnabledState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJobProperties">
+      <soap:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/GetJobProperties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetJobPropertiesWarehouseControlRequestHeader" part="WarehouseControlRequestHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessDefaultDimensionsForExpandedCapacity">
+      <soap:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/ProcessDefaultDimensionsForExpandedCapacity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WarehouseControlWebServiceSoap12" type="tns:WarehouseControlWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TakeWarehouseProcessingOffline">
+      <soap12:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/TakeWarehouseProcessingOffline" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BringWarehouseProcessingOnline">
+      <soap12:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/BringWarehouseProcessingOnline" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TakeAnalysisProcessingOffline">
+      <soap12:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/TakeAnalysisProcessingOffline" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BringAnalysisProcessingOnline">
+      <soap12:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/BringAnalysisProcessingOnline" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeSetting">
+      <soap12:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/ChangeSetting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSettings">
+      <soap12:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/GetSettings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessWarehouse">
+      <soap12:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/ProcessWarehouse" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessAnalysisDatabase">
+      <soap12:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/ProcessAnalysisDatabase" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProcessingStatus">
+      <soap12:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/GetProcessingStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetProcessingStatusWarehouseControlRequestHeader" part="WarehouseControlRequestHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetWarehouseJobEnabledState">
+      <soap12:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/SetWarehouseJobEnabledState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAnalysisJobEnabledState">
+      <soap12:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/SetAnalysisJobEnabledState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJobProperties">
+      <soap12:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/GetJobProperties" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetJobPropertiesWarehouseControlRequestHeader" part="WarehouseControlRequestHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessDefaultDimensionsForExpandedCapacity">
+      <soap12:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03/ProcessDefaultDimensionsForExpandedCapacity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WarehouseControlWebService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Team Foundation Warehouse Control web service</wsdl:documentation>
+    <wsdl:port name="WarehouseControlWebServiceSoap" binding="tns:WarehouseControlWebServiceSoap">
+      <soap:address location="http://localhost:8080/tfs/TeamFoundation/Administration/v3.0/WarehouseControlService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WarehouseControlWebServiceSoap12" binding="tns:WarehouseControlWebServiceSoap12">
+      <soap12:address location="http://localhost:8080/tfs/TeamFoundation/Administration/v3.0/WarehouseControlService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

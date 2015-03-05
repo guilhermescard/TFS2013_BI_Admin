@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://localhost:8080/tfs/TeamFoundation/Administration/v3.0/WarehouseControlService.asmx?wsdl" docRef="http://localhost:8080/tfs/TeamFoundation/Administration/v3.0/WarehouseControlService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://localhost:8080/tfs/TeamFoundation/Administration/v3.0/WarehouseControlService.asmx" xmlns:q1="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03" binding="q1:WarehouseControlWebServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://localhost:8080/tfs/TeamFoundation/Administration/v3.0/WarehouseControlService.asmx" xmlns:q2="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Controller/03" binding="q2:WarehouseControlWebServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>
